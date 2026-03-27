@@ -11,5 +11,9 @@ export const VENUE_SEARCH_QUERY =
 /** Full-bleed hero background (place file in /public). */
 export const HERO_FLORAL_IMAGE = '/hero-floral.png'
 
+/** Invitation line below couple names on the hero. */
+export const HERO_INVITE_TEXT =
+  'You are invited to join us in celebrating the engagement of Abdul Rehman and Zainab Iman.'
+
 /** Event start for countdown (Asia/Karachi, arrival 5:00 PM). */
 export const EVENT_ISO = '2026-03-29T17:00:00+05:00'
