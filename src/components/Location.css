@@ -6,12 +6,13 @@
 
 .section-title {
   margin: 0 0 1.25rem;
-  font-family: var(--font-display);
-  font-size: 1.5rem;
-  font-weight: 500;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  font-family: var(--font-heading-period);
+  font-size: 1.65rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  text-transform: none;
   color: var(--gold-deep);
+  line-height: 1.25;
 }
 
 .location-card {
@@ -49,8 +50,8 @@
 .location-venue {
   margin: 1.5rem auto 0;
   max-width: 22rem;
-  font-family: var(--font-sans);
-  font-size: 0.95rem;
+  font-family: var(--font-body);
+  font-size: 1.02rem;
   line-height: 1.55;
   color: var(--ink);
   opacity: 0.92;

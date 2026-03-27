@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
 import './EnvelopeIntro.css'
 
@@ -8,6 +8,7 @@ type Props = {
 
 export function EnvelopeIntro({ onComplete }: Props) {
   const rootRef = useRef<HTMLDivElement>(null)
+  const stageRef = useRef<HTMLDivElement>(null)
   const flapGroupRef = useRef<HTMLDivElement>(null)
   const sealRef = useRef<HTMLDivElement>(null)
   const shimmerRef = useRef<HTMLDivElement>(null)
@@ -18,6 +19,28 @@ export function EnvelopeIntro({ onComplete }: Props) {
   const prefersReduced =
     typeof window !== 'undefined' &&
     window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+  useEffect(() => {
+    if (hidden) return
+    const stage = stageRef.current
+    if (!stage) return
+    if (prefersReduced) {
+      gsap.set(stage, { clearProps: 'opacity,transform' })
+      return
+    }
+    gsap.fromTo(
+      stage,
+      { opacity: 0, y: 24, scale: 0.94 },
+      {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        duration: 1,
+        ease: 'power2.out',
+        delay: 0.08,
+      },
+    )
+  }, [hidden, prefersReduced])
 
   const finish = useCallback(() => {
     setHidden(true)
@@ -46,11 +69,12 @@ export function EnvelopeIntro({ onComplete }: Props) {
 
     gsap.set(shimmer, { xPercent: -120, opacity: 0 })
     gsap.set(flapGroup, {
-      transformPerspective: 1000,
+      transformPerspective: 1100,
       rotationX: 0,
       force3D: true,
     })
-    gsap.set(seal, { z: 14, y: 0, scale: 1, force3D: true })
+    gsap.set(seal, { z: 14, y: 0, scale: 1, rotationZ: 0, force3D: true })
+    gsap.set(tagline, { y: 0, filter: 'brightness(1)' })
 
     const tl = gsap.timeline({
       defaults: { ease: 'power3.out' },
@@ -60,51 +84,62 @@ export function EnvelopeIntro({ onComplete }: Props) {
     const sealLiftShadow =
       'inset 0 3px 6px rgba(255,255,255,0.28), inset 0 -4px 10px rgba(25,35,22,0.35), 0 4px 10px rgba(35,48,32,0.22), 0 12px 22px rgba(35,48,32,0.32), 0 0 0 1px rgba(30,40,28,0.35)'
 
-    tl.timeScale(0.94)
+    tl.timeScale(0.9)
       .to(shimmer, {
         opacity: 1,
         xPercent: 180,
-        duration: 0.98,
+        duration: 1.02,
         ease: 'sine.inOut',
       })
       .to(
         [seal, tagline],
         {
-          filter: 'brightness(1.04)',
-          duration: 0.28,
+          filter: 'brightness(1.05)',
+          duration: 0.32,
           ease: 'sine.out',
         },
-        '-=0.25',
+        '-=0.28',
       )
-      .to(shimmer, { opacity: 0, duration: 0.25, ease: 'sine.out' })
+      .to(shimmer, { opacity: 0, duration: 0.28, ease: 'sine.out' })
       .to(seal, {
-        y: -12,
-        scale: 1.03,
-        z: 14,
+        y: -14,
+        scale: 1.035,
+        rotationZ: 1.5,
+        z: 16,
         boxShadow: sealLiftShadow,
-        duration: 0.88,
-        ease: 'power2.out',
+        duration: 0.92,
+        ease: 'power3.out',
         force3D: true,
       })
       .to(
+        tagline,
+        {
+          y: -8,
+          duration: 0.85,
+          ease: 'power2.out',
+        },
+        '-=0.88',
+      )
+      .to(
         flapGroup,
         {
-          rotationX: -132,
-          duration: 1.35,
-          ease: 'sine.inOut',
+          rotationX: -136,
+          duration: 1.48,
+          ease: 'power3.inOut',
           force3D: true,
         },
-        '-=0.1',
+        '-=0.12',
       )
       .to(
         root,
         {
           opacity: 0,
-          y: -16,
-          duration: 0.78,
-          ease: 'power2.out',
+          y: -20,
+          scale: 0.99,
+          duration: 0.88,
+          ease: 'power3.inOut',
         },
-        '-=0.12',
+        '-=0.18',
       )
   }, [busy, hidden, prefersReduced, finish])
 
@@ -133,7 +168,10 @@ export function EnvelopeIntro({ onComplete }: Props) {
     >
       <div className="envelope-intro__glow" aria-hidden />
       <div className="envelope-intro__pattern" aria-hidden />
-      <div className="envelope-stage">
+      <div
+        ref={stageRef}
+        className={`envelope-stage${prefersReduced ? '' : ' envelope-stage--enter'}`}
+      >
         <div className="envelope-perspective">
           <div className="envelope-body">
             <div className="envelope-liner" aria-hidden />

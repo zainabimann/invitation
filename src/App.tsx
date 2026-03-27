@@ -26,9 +26,21 @@ function App() {
       )}
       <main className="main-shell">
         <Hero />
+        <div className="section-divider" aria-hidden>
+          <span className="section-divider__ornament" />
+        </div>
         <Countdown />
+        <div className="section-divider" aria-hidden>
+          <span className="section-divider__ornament" />
+        </div>
         <Location />
+        <div className="section-divider" aria-hidden>
+          <span className="section-divider__ornament" />
+        </div>
         <Details />
+        <div className="section-divider" aria-hidden>
+          <span className="section-divider__ornament" />
+        </div>
         <Rsvp />
       </main>
     </>

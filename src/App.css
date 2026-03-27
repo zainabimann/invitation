@@ -5,3 +5,41 @@
   padding-right: env(safe-area-inset-right);
   padding-bottom: env(safe-area-inset-bottom);
 }
+
+/* Ornamental dividers between sections */
+.section-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  padding: 0.35rem 1.25rem;
+  margin: 0;
+  border: none;
+  background: transparent;
+}
+
+.section-divider::before,
+.section-divider::after {
+  content: '';
+  flex: 1;
+  max-width: 8rem;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(199, 123, 138, 0.35),
+    rgba(201, 169, 97, 0.45),
+    rgba(199, 123, 138, 0.35),
+    transparent
+  );
+}
+
+.section-divider__ornament {
+  flex-shrink: 0;
+  width: 5px;
+  height: 5px;
+  transform: rotate(45deg);
+  background: linear-gradient(135deg, var(--gold) 0%, var(--rose-muted) 100%);
+  opacity: 0.75;
+  box-shadow: 0 0 0 1px rgba(154, 123, 74, 0.25);
+}

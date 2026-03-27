@@ -12,20 +12,24 @@ export function Rsvp() {
       <h2 id="rsvp-heading" className="section-title">
         RSVP
       </h2>
-      <ol className="rsvp-list">
-        {RSVP_CONTACTS.map((c) => (
-          <li key={c.phone} className="rsvp-row">
-            <span className="rsvp-name">{c.name}</span>
-            <a
-              href={`tel:${c.phone.replace(/\s/g, '')}`}
-              className="rsvp-link"
-              aria-label={`Call ${c.name} at ${c.phone}`}
-            >
-              {c.phone}
-            </a>
+      <ul className="rsvp-cards">
+        {RSVP_CONTACTS.map((c, i) => (
+          <li key={c.phone} className="rsvp-cards__item">
+            <article className="rsvp-card" aria-labelledby={`rsvp-name-${i}`}>
+              <h3 id={`rsvp-name-${i}`} className="rsvp-card__name">
+                {c.name}
+              </h3>
+              <a
+                href={`tel:${c.phone.replace(/\s/g, '')}`}
+                className="rsvp-card__link"
+                aria-label={`Call ${c.name} at ${c.phone}`}
+              >
+                {c.phone}
+              </a>
+            </article>
           </li>
         ))}
-      </ol>
+      </ul>
     </section>
   )
 }

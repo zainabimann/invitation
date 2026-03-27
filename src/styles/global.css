@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;1,9..40,400&family=Great+Vibes&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Great+Vibes&family=IM+Fell+English+SC&family=Jost:ital,wght@0,400;0,500;0,600;1,400&display=swap');
 
 :root {
   /* Bridgerton-inspired: ivory, blush, dusty rose, champagne gold */
@@ -23,17 +23,22 @@
   --shadow-soft: 0 18px 48px rgba(90, 52, 68, 0.14);
   --shadow-warm: 0 8px 32px rgba(120, 72, 88, 0.18);
 
-  --font-display: 'Playfair Display', Georgia, serif;
-  --font-body: 'Cormorant Garamond', Georgia, serif;
-  --font-sans: 'DM Sans', system-ui, sans-serif;
+  /* Typography: classical English + soft display + period headings */
+  --font-body: 'EB Garamond', 'Cormorant Garamond', Georgia, serif;
+  --font-display: 'Fraunces', 'Playfair Display', Georgia, serif;
+  --font-heading-period: 'IM Fell English SC', 'Times New Roman', serif;
+  --font-sans: 'Jost', 'DM Sans', system-ui, sans-serif;
+  --font-ui: var(--font-sans);
   --font-script: 'Great Vibes', cursive;
 
   font-family: var(--font-body);
   font-size: 18px;
-  line-height: 1.5;
+  line-height: 1.62;
+  letter-spacing: 0.012em;
   color: var(--ink);
   background: var(--bg-cream);
   text-rendering: optimizeLegibility;
+  font-feature-settings: 'kern' 1, 'liga' 1, 'clig' 1;
   -webkit-font-smoothing: antialiased;
   -webkit-tap-highlight-color: rgba(199, 123, 138, 0.22);
 }

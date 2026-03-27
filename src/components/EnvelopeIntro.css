@@ -56,6 +56,10 @@
   align-items: center;
 }
 
+.envelope-stage--enter {
+  opacity: 0;
+}
+
 .envelope-perspective {
   perspective: 1200px;
   perspective-origin: 50% 28%;
@@ -307,12 +311,12 @@
   padding: 0 0.75rem;
   box-sizing: border-box;
   font-family: var(--font-body);
-  font-size: 0.78rem;
-  font-weight: 600;
+  font-size: 0.95rem;
+  font-weight: 500;
   font-style: italic;
   color: var(--gold-deep);
   text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
-  line-height: 1.25;
+  line-height: 1.35;
   text-align: center;
   overflow-wrap: anywhere;
 }
@@ -324,9 +328,10 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-family: var(--font-sans);
-  font-size: 0.72rem;
-  letter-spacing: 0.22em;
+  font-family: var(--font-ui);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.24em;
   text-transform: uppercase;
   color: var(--rose-deep);
   opacity: 0.88;
@@ -349,6 +354,6 @@
   }
 
   .envelope-tagline {
-    font-size: 0.8rem;
+    font-size: 0.88rem;
   }
 }
