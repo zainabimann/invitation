@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;1,9..40,400&family=Great+Vibes&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap');
+
+:root {
+  /* Bridgerton-inspired: ivory, blush, dusty rose, champagne gold */
+  --bg-cream: #faf5f7;
+  --bg-warm: #f3e8ec;
+  --bg-deep: #eadde2;
+  --blush: #e8c9d4;
+  --rose: #c77b8a;
+  --rose-deep: #8f4d5c;
+  --rose-muted: rgba(199, 123, 138, 0.35);
+  --wax-rose: #a85d6e;
+  --wax-rose-deep: #7a3d4d;
+  /* Envelope wax seal (muted sage-green) */
+  --wax-sage-highlight: #9aab92;
+  --wax-sage: #6f7f68;
+  --wax-sage-mid: #5a6b54;
+  --wax-sage-deep: #3d4a3a;
+  --gold: #c9a961;
+  --gold-light: #e8d4b8;
+  --gold-deep: #9a7b4a;
+  --ink: #3a2a30;
+  --shadow-soft: 0 18px 48px rgba(90, 52, 68, 0.14);
+  --shadow-warm: 0 8px 32px rgba(120, 72, 88, 0.18);
+
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'DM Sans', system-ui, sans-serif;
+  --font-script: 'Great Vibes', cursive;
+
+  font-family: var(--font-body);
+  font-size: 18px;
+  line-height: 1.5;
+  color: var(--ink);
+  background: var(--bg-cream);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: rgba(199, 123, 138, 0.22);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  overflow-x: hidden;
+}
+
+body {
+  margin: 0;
+  min-height: 100svh;
+  min-height: 100dvh;
+  overflow-x: hidden;
+}
+
+body.intro-locked {
+  overflow: hidden;
+}
+
+#root {
+  min-height: 100svh;
+  min-height: 100dvh;
+  overflow-x: hidden;
+}
+
+a {
+  color: var(--rose-deep);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,0 +1,354 @@
+/* Classic closed-envelope silhouette: liner + side folds + bottom chevron + triangular top flap */
+
+.envelope-intro {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: max(1.5rem, calc(env(safe-area-inset-top) + 12px))
+    max(1.25rem, calc(env(safe-area-inset-right) + 12px))
+    max(1.5rem, calc(env(safe-area-inset-bottom) + 12px))
+    max(1.25rem, calc(env(safe-area-inset-left) + 12px));
+  min-height: 100svh;
+  min-height: 100dvh;
+  cursor: pointer;
+  background: radial-gradient(
+      ellipse 85% 65% at 50% 38%,
+      #fff8fa 0%,
+      var(--bg-warm) 45%,
+      #e8d0d8 100%
+    );
+  transition: opacity 0.4s ease;
+}
+
+.envelope-intro:focus-visible {
+  outline: 2px solid var(--rose);
+  outline-offset: 4px;
+}
+
+.envelope-intro__glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at 50% 32%,
+    rgba(255, 255, 255, 0.55) 0%,
+    transparent 50%
+  );
+  pointer-events: none;
+}
+
+.envelope-intro__pattern {
+  position: absolute;
+  inset: 0;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0L30 60M0 30L60 30' stroke='%238f4d5c' stroke-width='0.5' fill='none'/%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+.envelope-stage {
+  position: relative;
+  text-align: center;
+  padding: 0.75rem 0.5rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.envelope-perspective {
+  perspective: 1200px;
+  perspective-origin: 50% 28%;
+  filter: drop-shadow(0 16px 28px rgba(70, 40, 55, 0.2))
+    drop-shadow(0 4px 8px rgba(70, 40, 55, 0.12));
+}
+
+.envelope-body {
+  position: relative;
+  width: min(320px, 86vw);
+  height: 220px;
+  margin: 0 auto;
+  transform-style: preserve-3d;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.envelope-liner {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-color: #f4e8ec;
+  background-image:
+    linear-gradient(155deg, rgba(255, 255, 255, 0.5) 0%, transparent 42%),
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.09'/%3E%3C/svg%3E");
+  border: 1px solid rgba(195, 145, 160, 0.28);
+}
+
+/* Side panels: triangles meeting the bottom chevron near center */
+.envelope-fold {
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.envelope-fold--left {
+  left: 0;
+  bottom: 0;
+  width: 50.5%;
+  height: 62%;
+  clip-path: polygon(0 100%, 0 8%, 98% 52%, 98% 100%);
+  background: linear-gradient(
+    125deg,
+    #e5ccd6 0%,
+    #efd8df 45%,
+    #e8ccd4 100%
+  );
+  box-shadow: inset 4px 0 8px rgba(255, 255, 255, 0.45);
+  border-left: 1px solid rgba(175, 125, 145, 0.22);
+}
+
+.envelope-fold--right {
+  right: 0;
+  bottom: 0;
+  width: 50.5%;
+  height: 62%;
+  clip-path: polygon(2% 52%, 2% 100%, 100% 100%, 100% 8%);
+  background: linear-gradient(
+    235deg,
+    #e5ccd6 0%,
+    #efd8df 45%,
+    #e8ccd4 100%
+  );
+  box-shadow: inset -4px 0 8px rgba(255, 255, 255, 0.45);
+  border-right: 1px solid rgba(175, 125, 145, 0.22);
+}
+
+/* Bottom front panel: chevron pointing up */
+.envelope-fold--bottom {
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 58%;
+  z-index: 2;
+  clip-path: polygon(50% 0, 0 100%, 100% 100%);
+  background: linear-gradient(
+    178deg,
+    #f8eef2 0%,
+    #ecd6de 55%,
+    #e2c6d0 100%
+  );
+  box-shadow:
+    inset 0 3px 10px rgba(255, 255, 255, 0.55),
+    inset 0 -2px 6px rgba(120, 70, 90, 0.05);
+  border-bottom: 1px solid rgba(175, 125, 145, 0.25);
+}
+
+.envelope-fold--bottom::after {
+  content: '';
+  position: absolute;
+  left: 12%;
+  right: 12%;
+  top: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(150, 100, 120, 0.28),
+    transparent
+  );
+}
+
+/* Top flap + seal: same clip as flap so nothing draws outside the triangle */
+.envelope-top-group {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 56%;
+  transform-style: preserve-3d;
+  transform-origin: top center;
+  z-index: 4;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  overflow: hidden;
+}
+
+.envelope-flap-outer {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  transform-style: preserve-3d;
+  z-index: 1;
+}
+
+.envelope-flap {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  transform-origin: top center;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  background: linear-gradient(
+    168deg,
+    #fffafc 0%,
+    #f5e4ea 38%,
+    #e9ccd6 100%
+  );
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.85),
+    inset 0 -8px 16px rgba(140, 85, 100, 0.06);
+  border: none;
+}
+
+.envelope-seal-cluster {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 14px 14px;
+  box-sizing: border-box;
+  min-height: 0;
+  max-height: 100%;
+  z-index: 10;
+  pointer-events: none;
+  transform-style: preserve-3d;
+}
+
+.wax-seal {
+  position: relative;
+  z-index: 2;
+  width: 82px;
+  height: 82px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  isolation: isolate;
+  transform-style: preserve-3d;
+  will-change: transform;
+  overflow: hidden;
+  background: radial-gradient(
+    circle at 32% 26%,
+    var(--wax-sage-highlight) 0%,
+    var(--wax-sage) 38%,
+    var(--wax-sage-mid) 68%,
+    var(--wax-sage-deep) 100%
+  );
+  box-shadow:
+    inset 0 3px 6px rgba(255, 255, 255, 0.28),
+    inset 0 -4px 10px rgba(25, 35, 22, 0.35),
+    0 3px 6px rgba(45, 55, 40, 0.18),
+    0 8px 18px rgba(35, 48, 32, 0.3),
+    0 0 0 1px rgba(30, 40, 28, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wax-seal::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.16);
+  box-shadow:
+    inset 0 2px 4px rgba(255, 255, 255, 0.18),
+    inset 0 -3px 6px rgba(20, 30, 18, 0.35);
+  box-sizing: border-box;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.wax-seal__shimmer {
+  position: absolute;
+  inset: 0;
+  width: 45%;
+  border-radius: 50%;
+  background: linear-gradient(
+    105deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.5) 45%,
+    rgba(255, 255, 255, 0.75) 50%,
+    rgba(255, 255, 255, 0.45) 55%,
+    transparent 100%
+  );
+  opacity: 0;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+}
+
+.wax-seal__initials {
+  font-family: var(--font-script);
+  font-size: 1.65rem;
+  line-height: 1;
+  color: var(--gold-light);
+  text-shadow:
+    0 1px 0 rgba(15, 25, 12, 0.45),
+    0 2px 4px rgba(255, 255, 255, 0.15),
+    0 0 14px rgba(232, 212, 184, 0.45);
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+  text-align: center;
+  padding: 0 6px;
+  position: relative;
+  z-index: 1;
+  display: block;
+}
+
+.envelope-tagline {
+  margin: 0.85rem 0 0;
+  max-width: min(22rem, 92vw);
+  padding: 0 0.75rem;
+  box-sizing: border-box;
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 600;
+  font-style: italic;
+  color: var(--gold-deep);
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+  line-height: 1.25;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+.envelope-hint {
+  margin: 0.5rem 0 0;
+  padding: 0.75rem 1rem;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--rose-deep);
+  opacity: 0.88;
+}
+
+@media (max-width: 380px) {
+  .envelope-body {
+    width: min(300px, 88vw);
+    height: 204px;
+  }
+
+  .wax-seal {
+    width: 76px;
+    height: 76px;
+  }
+
+  .wax-seal__initials {
+    font-size: 1.55rem;
+    padding: 0 8px;
+  }
+
+  .envelope-tagline {
+    font-size: 0.8rem;
+  }
+}
