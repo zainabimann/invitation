@@ -11,7 +11,21 @@ export const VENUE_SEARCH_QUERY =
 /** Full-bleed hero background (place file in /public). */
 export const HERO_FLORAL_IMAGE = '/hero-floral.png'
 
-/** Invitation line below couple names on the hero. */
+/** Full-screen tap-to-dissolve intro (place file in /public). */
+export const INTRO_SPLASH_IMAGE = '/invite-splash.png'
+
+/** Formal host lines at top of hero (above couple names). */
+export const HERO_HOST_LINES = [
+  'Mr. & Mrs. Iqbal Ali',
+  'request the honor of your presence',
+  'at the engagement ceremony of their daughter',
+] as const
+
+/** Couple names in hero (bride / partner order). */
+export const HERO_NAME_BRIDE = 'Zainab Iman'
+export const HERO_NAME_PARTNER = 'Abdul Rehman'
+
+/** Closing invitation line below names on the hero. */
 export const HERO_INVITE_TEXT =
   'You are invited to join us in celebrating the lovely and joyful occasion.'
 
